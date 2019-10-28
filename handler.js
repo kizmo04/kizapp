@@ -1,11 +1,12 @@
 'use strict';
 
+const request = require('request-promise-native');
 const queryString = require('query-string');
 const {Translate} = require('@google-cloud/translate');
 
 module.exports.translateToKorean = async event => {
   const body = queryString.parse(event.body);
-  let input = body.text;
+  let input = 'hi, my name is Henry';
   const response_type = 'in_channel';
   const target = 'ko';
   const source = 'en';
@@ -27,16 +28,30 @@ module.exports.translateToKorean = async event => {
     };
   }
 
-  const translate = new Translate({projectId: 'parabolic-braid-257302'});
+  // const translate = new Translate({projectId: 'parabolic-braid-257302'});
+  // let [translations] = await translate.translate(input, target);
+  // translations = Array.isArray(translations) ? translations : [translations];
+
+  // translations.forEach((translation, i) => {
+    //   text += translation;
+    // });
 
   try {
-    let [translations] = await translate.translate(input, target);
-    translations = Array.isArray(translations) ? translations : [translations];
-
-    translations.forEach((translation, i) => {
-      text += translation;
+    const res = await request.post({
+      url: 'https://openapi.naver.com/v1/papago/n2mt',
+      form: {
+        source,
+        target,
+        text: input
+      },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'X-Naver-Client-Id': `${process.env.NAVER_CLIENT_ID}`,
+        'X-Naver-Client-Secret': `${process.env.NAVER_CLIENT_SECRET}`
+      }
     });
 
+    text = JSON.parse(res).message.result.translatedText;
   } catch (error) {
     console.log(error);
   }

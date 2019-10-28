@@ -7,6 +7,8 @@ provider:
   region: ap-northeast-2
   environment:
     GOOGLE_APPLICATION_CREDENTIALS: ${env:GOOGLE_APPLICATION_CREDENTIALS}
+    NAVER_CLIENT_ID: ${env:NAVER_CLIENT_ID}
+    NAVER_CLIENT_SECRET: ${env:NAVER_CLIENT_SECRET}
 
 functions:
   translateToKorean:
