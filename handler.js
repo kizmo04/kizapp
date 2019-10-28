@@ -1,8 +1,6 @@
 'use strict';
 
 const queryString = require('query-string');
-const cheerio = require('cheerio');
-const axios = require('axios');
 const {Translate} = require('@google-cloud/translate');
 
 module.exports.translateToKorean = async event => {
