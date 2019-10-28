@@ -5,6 +5,8 @@ provider:
   runtime: nodejs8.10
   stage: ${opt:stage, 'dev'}
   region: ap-northeast-2
+  environment:
+    GOOGLE_APPLICATION_CREDENTIALS: ${env:GOOGLE_APPLICATION_CREDENTIALS}
 
 functions:
   translateToKorean:

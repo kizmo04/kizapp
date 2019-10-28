@@ -2,25 +2,39 @@
 
 const queryString = require('query-string');
 const cheerio = require('cheerio');
+const axios = require('axios');
 const {Translate} = require('@google-cloud/translate');
 
 module.exports.translateToKorean = async event => {
   const body = queryString.parse(event.body);
-  const content = body.text;
+  const input = 'hello';
   const response_type = 'in_channel';
+  const target = 'kr';
+  const source = 'en';
   let text = '';
 
-  if (content === 'help') {
+  if (input === 'help') {
     text = '도움말 입니다.';
+
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
+      body: JSON.stringify({
+        response_type,
+        text
+      })
+    };
   }
 
-  const translate = new Translate();
+  const translate = new Translate({projectId: 'parabolic-braid-257302'});
 
-  let [translations] = await translate.translate(content, 'kr');
-  translations = Array.isArray(translations) ? translations : [translations];
+  const results = await translate.translate(input, target);
 
-  translations.forEach(translation => {
-    text += translation;
+  results.forEach(result => {
+    text += result;
   });
 
   return {
