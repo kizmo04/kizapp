@@ -5,6 +5,7 @@
   "author": "kizmo04 <get.kizmo@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/translate": "^4.2.1",
     "cheerio": "^1.0.0-rc.3",
     "query-string": "^6.8.3"
   }
