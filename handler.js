@@ -7,9 +7,9 @@ const {Translate} = require('@google-cloud/translate');
 
 module.exports.translateToKorean = async event => {
   const body = queryString.parse(event.body);
-  const input = 'hello';
+  let input = body.text;
   const response_type = 'in_channel';
-  const target = 'kr';
+  const target = 'ko';
   const source = 'en';
   let text = '';
 
@@ -31,11 +31,17 @@ module.exports.translateToKorean = async event => {
 
   const translate = new Translate({projectId: 'parabolic-braid-257302'});
 
-  const results = await translate.translate(input, target);
+  try {
+    let [translations] = await translate.translate(input, target);
+    translations = Array.isArray(translations) ? translations : [translations];
 
-  results.forEach(result => {
-    text += result;
-  });
+    translations.forEach((translation, i) => {
+      text += translation;
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
 
   return {
     statusCode: 200,
