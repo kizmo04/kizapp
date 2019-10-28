@@ -5,7 +5,6 @@
   "author": "kizmo04 <get.kizmo@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@google-cloud/translate": "^4.2.1",
     "query-string": "^6.8.3",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7"

@@ -2,11 +2,11 @@
 
 const request = require('request-promise-native');
 const queryString = require('query-string');
-const {Translate} = require('@google-cloud/translate');
+// const {Translate} = require('@google-cloud/translate');
 
 module.exports.translateToKorean = async event => {
   const body = queryString.parse(event.body);
-  let input = 'hi, my name is Henry';
+  let input = body.text;
   const response_type = 'in_channel';
   const target = 'ko';
   const source = 'en';
