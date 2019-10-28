@@ -1,0 +1,16 @@
+service: kizapp # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'}
+  region: ap-northeast-2
+
+functions:
+  translateToKorean:
+    handler: handler.translateToKorean
+    events:
+      - http:
+          path: translate
+          method: post
+          cors: true

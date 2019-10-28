@@ -2,11 +2,10 @@
   "name": "kizapp",
   "version": "1.0.0",
   "description": "",
-  "main": "handler.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "kizmo04 <get.kizmo@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "query-string": "^6.8.3"
+  }
 }
